@@ -1,0 +1,71 @@
+{
+	"info": {
+		"_postman_id": "80fca699-4eec-4fd7-b96c-e28c6625125a",
+		"name": "FixrProducer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36136269"
+	},
+	"item": [
+		{
+			"name": "SaveLocation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"name\":\"b\",\n   \"geometry_polygon\":{\n      \"type\":\"Polygon\",\n      \"coordinates\":[\n         [\n            [\n               100.0,\n               0.0\n            ],\n            [\n               101.0,\n               0.0\n            ],\n            [\n               101.0,\n               1.0\n            ],\n            [\n               100.0,\n               1.0\n            ],\n            [\n               100.0,\n               0.0\n            ]\n         ]\n      ]\n   },\n   \"geometry_point\":{\n      \"type\":\"Point\",\n      \"coordinates\":[\n         100.0,\n         100.0\n      ]\n   }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/geofences",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"geofences"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllLocations",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/geofences",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"geofences"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
