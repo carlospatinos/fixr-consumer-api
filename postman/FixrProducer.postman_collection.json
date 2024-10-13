@@ -129,6 +129,70 @@
 					"header": null,
 					"cookie": [],
 					"body": null
+				},
+				{
+					"name": "AthlonePlumberCLocation",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"plumberC\",\n    \"geometry_polygon\": {\n            \"type\": \"Polygon\",\n            \"coordinates\": [\n                [\n                    [\n                        -7.94330739,\n                        53.42347264\n                    ],\n                    [\n                        -7.94337227,\n                        53.42480623\n                    ],\n                    [\n                        -7.9435663,\n                        53.42612698\n                    ],\n                    [\n                        -7.9438876,\n                        53.42742217\n                    ],\n                    [\n                        -7.94433308,\n                        53.42867932\n                    ],\n                    [\n                        -7.94489846,\n                        53.42988633\n                    ],\n                    [\n                        -7.94557828,\n                        53.43103157\n                    ],\n                    [\n                        -7.94636599,\n                        53.43210402\n                    ],\n                    [\n                        -7.94725403,\n                        53.43309333\n                    ],\n                    [\n                        -7.94823382,\n                        53.43399\n                    ],\n                    [\n                        -7.94929593,\n                        53.43478538\n                    ],\n                    [\n                        -7.95043014,\n                        53.43547181\n                    ],\n                    [\n                        -7.95162552,\n                        53.43604268\n                    ],\n                    [\n                        -7.95287056,\n                        53.4364925\n                    ],\n                    [\n                        -7.95415328,\n                        53.43681693\n                    ],\n                    [\n                        -7.95546131,\n                        53.43701284\n                    ],\n                    [\n                        -7.95678205,\n                        53.43707836\n                    ],\n                    [\n                        -7.9581028,\n                        53.43701284\n                    ],\n                    [\n                        -7.95941083,\n                        53.43681693\n                    ],\n                    [\n                        -7.96069354,\n                        53.4364925\n                    ],\n                    [\n                        -7.96193859,\n                        53.43604268\n                    ],\n                    [\n                        -7.96313397,\n                        53.43547181\n                    ],\n                    [\n                        -7.96426818,\n                        53.43478538\n                    ],\n                    [\n                        -7.96533029,\n                        53.43399\n                    ],\n                    [\n                        -7.96631008,\n                        53.43309333\n                    ],\n                    [\n                        -7.96719811,\n                        53.43210402\n                    ],\n                    [\n                        -7.96798583,\n                        53.43103157\n                    ],\n                    [\n                        -7.96866565,\n                        53.42988633\n                    ],\n                    [\n                        -7.96923102,\n                        53.42867932\n                    ],\n                    [\n                        -7.96967651,\n                        53.42742217\n                    ],\n                    [\n                        -7.96999781,\n                        53.42612698\n                    ],\n                    [\n                        -7.97019184,\n                        53.42480623\n                    ],\n                    [\n                        -7.97025672,\n                        53.42347264\n                    ],\n                    [\n                        -7.97019184,\n                        53.42213904\n                    ],\n                    [\n                        -7.96999781,\n                        53.42081829\n                    ],\n                    [\n                        -7.96967651,\n                        53.41952311\n                    ],\n                    [\n                        -7.96923102,\n                        53.41826595\n                    ],\n                    [\n                        -7.96866565,\n                        53.41705895\n                    ],\n                    [\n                        -7.96798583,\n                        53.4159137\n                    ],\n                    [\n                        -7.96719811,\n                        53.41484126\n                    ],\n                    [\n                        -7.96631008,\n                        53.41385194\n                    ],\n                    [\n                        -7.96533029,\n                        53.41295527\n                    ],\n                    [\n                        -7.96426818,\n                        53.41215989\n                    ],\n                    [\n                        -7.96313397,\n                        53.41147346\n                    ],\n                    [\n                        -7.96193859,\n                        53.41090259\n                    ],\n                    [\n                        -7.96069354,\n                        53.41045278\n                    ],\n                    [\n                        -7.95941083,\n                        53.41012835\n                    ],\n                    [\n                        -7.9581028,\n                        53.40993243\n                    ],\n                    [\n                        -7.95678205,\n                        53.40986692\n                    ],\n                    [\n                        -7.95546131,\n                        53.40993243\n                    ],\n                    [\n                        -7.95415328,\n                        53.41012835\n                    ],\n                    [\n                        -7.95287056,\n                        53.41045278\n                    ],\n                    [\n                        -7.95162552,\n                        53.41090259\n                    ],\n                    [\n                        -7.95043014,\n                        53.41147346\n                    ],\n                    [\n                        -7.94929593,\n                        53.41215989\n                    ],\n                    [\n                        -7.94823382,\n                        53.41295527\n                    ],\n                    [\n                        -7.94725403,\n                        53.41385194\n                    ],\n                    [\n                        -7.94636599,\n                        53.41484126\n                    ],\n                    [\n                        -7.94557828,\n                        53.4159137\n                    ],\n                    [\n                        -7.94489846,\n                        53.41705895\n                    ],\n                    [\n                        -7.94433308,\n                        53.41826595\n                    ],\n                    [\n                        -7.9438876,\n                        53.41952311\n                    ],\n                    [\n                        -7.9435663,\n                        53.42081829\n                    ],\n                    [\n                        -7.94337227,\n                        53.42213904\n                    ],\n                    [\n                        -7.94330739,\n                        53.42347264\n                    ]\n                ]\n            ]\n        },\n    \"geometry_point\": {\n        \"coordinates\": [\n            -7.933333522131733,\n            53.428935604289904\n        ],\n        \"type\": \"Point\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/geofences",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"geofences"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "AthlonePlumberDLocationByLatLongDistance",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"plumberD\",\n    \"diameter\": 3000,\n    \"geometry_point\": {\n        \"coordinates\": [\n            -7.943368603631512,\n            53.41752495789626\n        ],\n        \"type\": \"Point\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/geofencesLatLong",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"geofencesLatLong"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
 				}
 			]
 		},
@@ -165,7 +229,7 @@
 			"response": []
 		},
 		{
-			"name": "GetNerabyService",
+			"name": "AthloneNerabyService",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -206,7 +270,49 @@
 			},
 			"response": [
 				{
-					"name": "GetNerabyServiceValid",
+					"name": "AthloneNerabyServiceA_B_C_D",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/nearby?latitude=-7.946099740759934&longitude=53.42868592137626",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"nearby"
+							],
+							"query": [
+								{
+									"key": "latitude",
+									"value": "-7.946099740759934"
+								},
+								{
+									"key": "longitude",
+									"value": "53.42868592137626"
+								}
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "AthloneNerabyServiceB_C",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
@@ -248,7 +354,7 @@
 					"body": null
 				},
 				{
-					"name": "GetNerabyServiceInvalid",
+					"name": "AthloneNerabyServiceB_D",
 					"originalRequest": {
 						"method": "GET",
 						"header": [],
@@ -262,7 +368,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/nearby?latitude=-8.017955782382955&longitude=53.410026882802526",
+							"raw": "http://localhost:8080/api/nearby?latitude=-7.943368603631512&longitude=53.4175249578962",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -275,11 +381,11 @@
 							"query": [
 								{
 									"key": "latitude",
-									"value": "-8.017955782382955"
+									"value": "-7.943368603631512"
 								},
 								{
 									"key": "longitude",
-									"value": "53.410026882802526"
+									"value": "53.4175249578962"
 								}
 							]
 						}

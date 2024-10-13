@@ -46,6 +46,13 @@ public class LocationController {
         return new ResponseEntity<>(geofenceResponse, HttpStatus.OK);
     }
 
+    @PostMapping("/geofencesLatLong")
+    public ResponseEntity<GeofenceResponse> createByLatLong(@RequestBody CreateGeofenceRequest requestBody) {
+        log.info("requestBody: {}", requestBody);
+        GeofenceResponse geofenceResponse = service.createGeofenceUseCaseLatLongDiam(requestBody);
+        return new ResponseEntity<>(geofenceResponse, HttpStatus.OK);
+    }
+
     @GetMapping("/geofences")
     public ResponseEntity<List<GeofenceResponse>> list() {
         List<GeofenceResponse> geofenceResponse = service.listGeofenceUseCase();

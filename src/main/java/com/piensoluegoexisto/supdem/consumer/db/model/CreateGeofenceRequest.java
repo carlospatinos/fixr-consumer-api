@@ -7,9 +7,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class CreateGeofenceRequest {
     @JsonProperty("name")
     private String name;
@@ -19,4 +21,7 @@ public class CreateGeofenceRequest {
 
     @JsonProperty("geometry_point")
     private Point geometryPoint;
+
+    @JsonProperty("diameter")
+    private Double diameterInMeters;
 }
