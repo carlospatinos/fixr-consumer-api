@@ -1,4 +1,4 @@
-package com.piensoluegoexisto.supdem.consumer;
+package com.descentrilizedsynergy.supdem.consumer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

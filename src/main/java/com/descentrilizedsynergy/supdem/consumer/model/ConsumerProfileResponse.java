@@ -1,4 +1,4 @@
-package com.piensoluegoexisto.supdem.consumer.db.model;
+package com.descentrilizedsynergy.supdem.consumer.model;
 
 import java.util.UUID;
 
@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class GeofenceResponse {
+public class ConsumerProfileResponse {
     private UUID id;
     private String name;
     private Polygon geometryPolygon;

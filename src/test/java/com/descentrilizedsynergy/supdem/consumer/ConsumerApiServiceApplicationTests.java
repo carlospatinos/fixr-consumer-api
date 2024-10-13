@@ -1,4 +1,4 @@
-package com.piensoluegoexisto.supdem.consumer;
+package com.descentrilizedsynergy.supdem.consumer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

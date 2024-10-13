@@ -1,4 +1,4 @@
-package com.piensoluegoexisto.supdem.consumer.db.model;
+package com.descentrilizedsynergy.supdem.consumer.db.model;
 
 import java.util.UUID;
 
@@ -19,13 +19,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "geofences")
+@Table(name = "consumer_profile")
 @AllArgsConstructor
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Geofence {
+public class ConsumerProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;

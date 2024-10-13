@@ -1,4 +1,4 @@
-package com.piensoluegoexisto.supdem.consumer.db.model;
+package com.descentrilizedsynergy.supdem.consumer.model;
 
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.Polygon;
@@ -12,7 +12,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class CreateGeofenceRequest {
+public class ConsumerProfileRequest {
     @JsonProperty("name")
     private String name;
 
