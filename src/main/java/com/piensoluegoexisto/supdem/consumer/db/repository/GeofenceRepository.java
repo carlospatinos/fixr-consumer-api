@@ -11,6 +11,7 @@ import com.piensoluegoexisto.supdem.consumer.db.model.Geofence;
 
 @Repository
 public interface GeofenceRepository extends CrudRepository<Geofence, UUID> {
-    @Query(value = "SELECT g.* FROM geofences g WHERE ST_Intersects(g.geometry_polygon, ST_SetSRID(ST_MakePoint(:lng, :lat), 4326))", nativeQuery = true)
+    // TODO remove the schema from the query
+    @Query(value = "SELECT g.* FROM fixr_app.geofences g WHERE ST_Intersects(g.geometry_polygon, ST_SetSRID(ST_MakePoint(:lng, :lat), 4326))", nativeQuery = true)
     public List<Geofence> findAllByLngLat(Double lng, Double lat);
 }

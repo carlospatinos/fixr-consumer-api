@@ -51,4 +51,12 @@ public class LocationController {
         List<GeofenceResponse> geofenceResponse = service.listGeofenceUseCase();
         return new ResponseEntity<>(geofenceResponse, HttpStatus.OK);
     }
+
+    @GetMapping("/nearby")
+    public ResponseEntity<List<GeofenceResponse>> listNearby(@RequestParam Double latitude,
+            @RequestParam Double longitude) {
+        log.info("Coordinates (lat,long): ({}, {})", latitude, longitude);
+        List<GeofenceResponse> geofenceResponse = service.getNearbyService(latitude, longitude);
+        return new ResponseEntity<>(geofenceResponse, HttpStatus.OK);
+    }
 }

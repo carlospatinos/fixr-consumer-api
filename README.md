@@ -26,3 +26,6 @@ CREATE INDEX geofences_geometry_polygon_idx ON geofences USING gist(geometry_pol
 
 # url
 http://localhost:8080/api/locations/near?latitude=10&longitude=10&distance=10
+
+# Drawer
+https://geojson.io/#map=2/0/20

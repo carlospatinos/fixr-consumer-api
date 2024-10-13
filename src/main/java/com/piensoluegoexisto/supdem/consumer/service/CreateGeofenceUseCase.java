@@ -41,4 +41,16 @@ public class CreateGeofenceUseCase {
 
         return l2;
     }
+
+    public List<GeofenceResponse> getNearbyService(Double latitude, Double longitude) {
+        Iterable<Geofence> geofence = geofenceRepository.findAllByLngLat(latitude, longitude);
+
+        List<Geofence> list = Streamable.of(geofence).toList();
+        List<GeofenceResponse> l2 = list.stream()
+                .map(g -> new GeofenceResponse(g.getId(), g.getName(), g.getGeometryPolygon(),
+                        g.getGeometryPoint()))
+                .collect(Collectors.toList());
+
+        return l2;
+    }
 }
