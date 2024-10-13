@@ -1,0 +1,50 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.4'
+	id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'com.piensoluegoexisto.supdem.consumer-api'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+	gradlePluginPortal()
+    maven {
+        url "https://packages.confluent.io/maven"
+    }
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	implementation 'io.cucumber:cucumber-java:7.12.1'
+	implementation 'io.cucumber:cucumber-spring:7.12.1'
+	testImplementation 'io.cucumber:cucumber-junit:7.12.1'
+	testImplementation 'org.junit.vintage:junit-vintage-engine:5.7.2'
+
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	runtimeOnly 'org.postgresql:postgresql'
+
+	implementation("org.locationtech.jts:jts-core:1.19.0")
+  	implementation("org.n52.jackson:jackson-datatype-jts:1.2.10")
+  	implementation("org.hibernate.orm:hibernate-spatial:6.4.4.Final")
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
