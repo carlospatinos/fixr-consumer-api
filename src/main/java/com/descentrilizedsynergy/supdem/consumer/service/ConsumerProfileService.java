@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Polygon;
+import org.locationtech.jts.geom.PrecisionModel;
 import org.locationtech.jts.util.GeometricShapeFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
@@ -19,25 +21,38 @@ import com.descentrilizedsynergy.supdem.consumer.model.ConsumerProfileResponse;
 public class ConsumerProfileService {
 
         @Autowired
-        private ConsumerProfileRepository geofenceRepository;
+        private ConsumerProfileRepository profileRepository;
 
-        public ConsumerProfileResponse createGeofenceUseCase(ConsumerProfileRequest requestBody) {
-                ConsumerProfile newGeofence = new ConsumerProfile(requestBody.getName(),
-                                requestBody.getGeometryPolygon(),
-                                requestBody.getGeometryPoint());
+        // TODO this works with both h2 and postgres but if we generate the covered area
+        // then fails
+        public ConsumerProfileResponse createProfileWithPolygon(ConsumerProfileRequest requestBody) {
+                ConsumerProfile newProfile = new ConsumerProfile(requestBody.getName(), requestBody.getLastName(),
+                                requestBody.getEmail(),
+                                requestBody.getTravelDistanceInMeters(), requestBody.getExactLocation(),
+                                requestBody.getCoveredArea());
 
-                ConsumerProfile geofence = geofenceRepository.save(newGeofence);
+                newProfile.setDescription(requestBody.getDescription());
+                newProfile.setDesiredHourlyRate(requestBody.getDesiredHourlyRate());
+                newProfile.setCurrency(requestBody.getCurrency());
 
-                return new ConsumerProfileResponse(geofence.getId(), geofence.getName(), geofence.getGeometryPolygon(),
-                                geofence.getGeometryPoint());
+                ConsumerProfile createdProfile = profileRepository.save(newProfile);
+
+                return new ConsumerProfileResponse(createdProfile.getId(), createdProfile.getName(),
+                                createdProfile.getLastName(),
+                                createdProfile.getEmail(),
+                                createdProfile.getDescription(),
+                                createdProfile.getDesiredHourlyRate(), createdProfile.getCoveredArea(),
+                                createdProfile.getExactLocation());
         }
 
-        public ConsumerProfileResponse createGeofenceUseCaseLatLongDiam(ConsumerProfileRequest requestBody) {
-                double latitude = requestBody.getGeometryPoint().getX(); // 40.689234d;
-                double longitude = requestBody.getGeometryPoint().getY(); // -74.044598d;
-                double diameterInMeters = requestBody.getDiameterInMeters(); // 2000d; // 2km
+        public ConsumerProfileResponse createProfile(ConsumerProfileRequest requestBody) {
+                double latitude = requestBody.getExactLocation().getX(); // 40.689234d;
+                double longitude = requestBody.getExactLocation().getY(); // -74.044598d;
+                double diameterInMeters = requestBody.getTravelDistanceInMeters(); // 2000d; // 2km
 
-                GeometricShapeFactory shapeFactory = new GeometricShapeFactory();
+                GeometricShapeFactory shapeFactory = new GeometricShapeFactory(
+                                new GeometryFactory(new PrecisionModel(PrecisionModel.FLOATING), 4326));
+
                 shapeFactory.setNumPoints(64); // adjustable
                 shapeFactory.setCentre(new Coordinate(latitude, longitude));
                 // Length in meters of 1° of latitude = always 111.32 km
@@ -45,38 +60,57 @@ public class ConsumerProfileService {
                 // Length in meters of 1° of longitude = 40075 km * cos( latitude ) / 360
                 shapeFactory.setHeight(diameterInMeters / (40075000 * Math.cos(Math.toRadians(latitude)) / 360));
 
-                Polygon generatedPolygon = shapeFactory.createEllipse();
+                Polygon coveredArea = shapeFactory.createCircle();
 
-                ConsumerProfile newGeofence = new ConsumerProfile(requestBody.getName(),
-                                generatedPolygon,
-                                requestBody.getGeometryPoint());
+                ConsumerProfile newProfile = new ConsumerProfile(requestBody.getName(), requestBody.getLastName(),
+                                requestBody.getEmail(),
+                                requestBody.getTravelDistanceInMeters(), requestBody.getExactLocation(),
+                                coveredArea);
 
-                ConsumerProfile geofence = geofenceRepository.save(newGeofence);
+                newProfile.setDescription(requestBody.getDescription());
+                newProfile.setDesiredHourlyRate(requestBody.getDesiredHourlyRate());
+                newProfile.setCurrency(requestBody.getCurrency());
 
-                return new ConsumerProfileResponse(geofence.getId(), geofence.getName(), geofence.getGeometryPolygon(),
-                                geofence.getGeometryPoint());
+                ConsumerProfile createdProfile = profileRepository.save(newProfile);
+
+                return new ConsumerProfileResponse(createdProfile.getId(), createdProfile.getName(),
+                                createdProfile.getLastName(),
+                                createdProfile.getEmail(),
+                                createdProfile.getDescription(),
+                                createdProfile.getDesiredHourlyRate(),
+                                createdProfile.getCoveredArea(),
+                                createdProfile.getExactLocation());
         }
 
-        public List<ConsumerProfileResponse> listGeofenceUseCase() {
+        public List<ConsumerProfileResponse> getProfiles() {
 
-                Iterable<ConsumerProfile> geofence = geofenceRepository.findAll();
+                Iterable<ConsumerProfile> profiles = profileRepository.findAll();
 
-                List<ConsumerProfile> list = Streamable.of(geofence).toList();
+                // TODO change transformation logic.
+                List<ConsumerProfile> list = Streamable.of(profiles).toList();
                 List<ConsumerProfileResponse> l2 = list.stream()
-                                .map(g -> new ConsumerProfileResponse(g.getId(), g.getName(), g.getGeometryPolygon(),
-                                                g.getGeometryPoint()))
+                                .map(g -> new ConsumerProfileResponse(g.getId(), g.getName(), g.getLastName(),
+                                                g.getEmail(),
+                                                g.getDescription(),
+                                                g.getDesiredHourlyRate(),
+                                                g.getCoveredArea(),
+                                                g.getExactLocation()))
                                 .collect(Collectors.toList());
 
                 return l2;
         }
 
-        public List<ConsumerProfileResponse> getNearbyService(Double latitude, Double longitude) {
-                Iterable<ConsumerProfile> geofence = geofenceRepository.findAllByLngLat(latitude, longitude);
+        public List<ConsumerProfileResponse> getProfileByProximityToLocation(Double latitude, Double longitude) {
+                Iterable<ConsumerProfile> profilesNearby = profileRepository.findAllByLngLat(latitude, longitude);
 
-                List<ConsumerProfile> list = Streamable.of(geofence).toList();
+                List<ConsumerProfile> list = Streamable.of(profilesNearby).toList();
                 List<ConsumerProfileResponse> l2 = list.stream()
-                                .map(g -> new ConsumerProfileResponse(g.getId(), g.getName(), g.getGeometryPolygon(),
-                                                g.getGeometryPoint()))
+                                .map(g -> new ConsumerProfileResponse(g.getId(), g.getName(), g.getLastName(),
+                                                g.getEmail(),
+                                                g.getDescription(),
+                                                g.getDesiredHourlyRate(),
+                                                g.getCoveredArea(),
+                                                g.getExactLocation()))
                                 .collect(Collectors.toList());
 
                 return l2;

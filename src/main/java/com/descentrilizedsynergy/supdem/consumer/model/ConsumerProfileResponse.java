@@ -17,6 +17,10 @@ import lombok.Setter;
 public class ConsumerProfileResponse {
     private UUID id;
     private String name;
-    private Polygon geometryPolygon;
-    private Point geometryPoint;
+    private String lastName;
+    private String email;
+    private String description;
+    private Double desiredHourlyRate;
+    private Polygon coveredArea;
+    private Point exactLocation;
 }

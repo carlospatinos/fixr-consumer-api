@@ -34,11 +34,33 @@ public class ConsumerProfile {
     @NonNull
     private String name;
 
-    @Column(name = "geometry_polygon", columnDefinition = "geometry(Polygon, 4326)", nullable = false)
+    @Column(name = "last_name", nullable = false)
     @NonNull
-    private Polygon geometryPolygon;
+    private String lastName;
 
-    @Column(name = "geometry_point", columnDefinition = "geometry(Point, 4326)", nullable = false)
+    @Column(name = "email", nullable = false)
     @NonNull
-    private Point geometryPoint;
+    private String email;
+
+    @Column(name = "description", nullable = true)
+    private String description;
+
+    @Column(name = "desired_hourly_price", nullable = true)
+    private Double desiredHourlyRate;
+
+    @Column(name = "travel_distance", nullable = true)
+    @NonNull
+    private Double travelDistance;
+
+    @Column(name = "exact_location", columnDefinition = "geometry(POINT, 4326)", nullable = true)
+    @NonNull
+    private Point exactLocation;
+
+    @Column(name = "currency", nullable = true)
+    private String currency;
+
+    @Column(name = "covered_area", columnDefinition = "geometry(POLYGON, 4326)", nullable = true)
+    @NonNull
+    private Polygon coveredArea;
+
 }

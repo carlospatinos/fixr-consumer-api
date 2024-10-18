@@ -1,8 +1,10 @@
 package com.descentrilizedsynergy.supdem.consumer.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,30 +31,42 @@ public class ConsumerApiController {
         return ResponseEntity.ok("Service working");
     }
 
-    @PostMapping("/geofences")
+    @Value(value = "${application.version}")
+    private String APPLICATION_VERSION;
+
+    // TODO remove
+    @PostMapping("/profileWithPolygon")
     public ResponseEntity<ConsumerProfileResponse> create(@RequestBody ConsumerProfileRequest requestBody) {
-        ConsumerProfileResponse geofenceResponse = service.createGeofenceUseCase(requestBody);
-        return new ResponseEntity<>(geofenceResponse, HttpStatus.OK);
+        log.info("Creating profile as follows: {}", requestBody);
+        ConsumerProfileResponse newProfile = service.createProfileWithPolygon(requestBody);
+        return new ResponseEntity<>(newProfile, HttpStatus.OK);
     }
 
-    @PostMapping("/geofencesLatLong")
-    public ResponseEntity<ConsumerProfileResponse> createByLatLong(@RequestBody ConsumerProfileRequest requestBody) {
-        log.info("requestBody: {}", requestBody);
-        ConsumerProfileResponse geofenceResponse = service.createGeofenceUseCaseLatLongDiam(requestBody);
-        return new ResponseEntity<>(geofenceResponse, HttpStatus.OK);
+    @PostMapping("/profile")
+    public ResponseEntity<ConsumerProfileResponse> createProfile(@RequestBody ConsumerProfileRequest requestBody) {
+        log.info("Creating profile as follows: {}", requestBody);
+        ConsumerProfileResponse newProfile = service.createProfile(requestBody);
+        return new ResponseEntity<>(newProfile, HttpStatus.OK);
     }
 
-    @GetMapping("/geofences")
-    public ResponseEntity<List<ConsumerProfileResponse>> list() {
-        List<ConsumerProfileResponse> geofenceResponse = service.listGeofenceUseCase();
-        return new ResponseEntity<>(geofenceResponse, HttpStatus.OK);
+    // TODO consider pagination and sorting
+    @GetMapping("/profiles")
+    public ResponseEntity<List<ConsumerProfileResponse>> listProfiles() {
+        List<ConsumerProfileResponse> profiles = service.getProfiles();
+        log.info("Returning [{}] profiles", profiles.size());
+        return new ResponseEntity<>(profiles, HttpStatus.OK);
     }
 
-    @GetMapping("/nearby")
-    public ResponseEntity<List<ConsumerProfileResponse>> listNearby(@RequestParam Double latitude,
+    @GetMapping("/profileCloseToLocation")
+    public ResponseEntity<List<ConsumerProfileResponse>> listByProximityToLocation(@RequestParam Double latitude,
             @RequestParam Double longitude) {
-        log.info("Coordinates (lat,long): ({}, {})", latitude, longitude);
-        List<ConsumerProfileResponse> geofenceResponse = service.getNearbyService(latitude, longitude);
-        return new ResponseEntity<>(geofenceResponse, HttpStatus.OK);
+        log.info("Returning profiles close to (lat,long): ({}, {})", latitude, longitude);
+        List<ConsumerProfileResponse> profiles = service.getProfileByProximityToLocation(latitude, longitude);
+        return new ResponseEntity<>(profiles, HttpStatus.OK);
+    }
+
+    @GetMapping("/version")
+    public String getVersion() {
+        return Optional.ofNullable(APPLICATION_VERSION).orElse("N/A");
     }
 }

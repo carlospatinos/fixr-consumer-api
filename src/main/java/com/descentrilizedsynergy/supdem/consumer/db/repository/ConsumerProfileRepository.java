@@ -11,7 +11,6 @@ import com.descentrilizedsynergy.supdem.consumer.db.model.ConsumerProfile;
 
 @Repository
 public interface ConsumerProfileRepository extends CrudRepository<ConsumerProfile, UUID> {
-    // TODO remove the schema from the query
-    @Query(value = "SELECT g.* FROM fixr_app.geofences g WHERE ST_Intersects(g.geometry_polygon, ST_SetSRID(ST_MakePoint(:lng, :lat), 4326))", nativeQuery = true)
+    @Query(value = "SELECT g.* FROM {h-schema}consumer_profile g WHERE ST_Intersects(g.covered_area, ST_SetSRID(ST_MakePoint(:lng, :lat), 4326))", nativeQuery = true)
     public List<ConsumerProfile> findAllByLngLat(Double lng, Double lat);
 }

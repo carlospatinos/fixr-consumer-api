@@ -16,12 +16,28 @@ public class ConsumerProfileRequest {
     @JsonProperty("name")
     private String name;
 
-    @JsonProperty("geometry_polygon")
-    private Polygon geometryPolygon;
+    @JsonProperty("lastName")
+    private String lastName;
 
-    @JsonProperty("geometry_point")
-    private Point geometryPoint;
+    @JsonProperty("email")
+    private String email;
 
-    @JsonProperty("diameter")
-    private Double diameterInMeters;
+    @JsonProperty("description")
+    private String description;
+
+    @JsonProperty("desiredHourlyRate")
+    private Double desiredHourlyRate;
+
+    @JsonProperty("exactLocation")
+    private Point exactLocation;
+
+    @JsonProperty("currency")
+    private String currency;
+
+    // TODO remove this as we will be generating the polygon dynamically.
+    @JsonProperty("coveredArea")
+    private Polygon coveredArea;
+
+    @JsonProperty("travelDistanceInMeters")
+    private Double travelDistanceInMeters;
 }
