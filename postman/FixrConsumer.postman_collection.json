@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"test\",\n    \"lastName\": \"testLast\",\n    \"email\": \"email@email.com\",\n    \"address\": \"Address\",\n    \"description\": \"desc\",\n    \"latitude\": 53.4271047,\n    \"longitude\": -7.9139203,\n    \"travelDistanceInMeters\": 2000,\n    \"exactLocation\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n            -7.9139203,\n            53.4271047\n        ]\n    }\n}",
+					"raw": "{\n    \"name\": \"test\",\n    \"lastName\": \"testLast\",\n    \"email\": \"email@email.com\",\n    \"address\": \"Address\",\n    \"description\": \"desc\",\n    \"latitude\": 53.4271047,\n    \"longitude\": -7.9139203,\n    \"exactLocation\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n            -7.9139203,\n            53.4271047\n        ]\n    }\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -71,7 +71,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Customer\",\n    \"lastName\": \"Two\",\n    \"email\": \"email@email.com\",\n    \"address\": \"Address\",\n    \"description\": \"desc\",\n    \"latitude\": 53.42347263783353,\n    \"longitude\": -7.956782053866533,\n    \"exactLocation\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n            -7.956782053866533,\n            53.42347263783353\n        ]\n    }\n}",
+							"raw": "{\n    \"name\": \"Customer\",\n    \"lastName\": \"Two\",\n    \"email\": \"email@email.com\",\n    \"address\": \"Address\",\n    \"description\": \"desc\",\n    \"latitude\": 53.42347263783353,\n    \"longitude\": -7.956782053866533\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -102,7 +102,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Customer\",\n    \"lastName\": \"Three\",\n    \"email\": \"email@email.com\",\n    \"address\": \"Address\",\n    \"description\": \"desc\",\n    \"latitude\": 53.428935604289904,\n    \"longitude\": -7.933333522131733,\n    \"exactLocation\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n            -7.933333522131733,\n            53.428935604289904\n        ]\n    }\n}",
+							"raw": "{\n    \"name\": \"Customer\",\n    \"lastName\": \"Three\",\n    \"email\": \"email@email.com\",\n    \"address\": \"Address\",\n    \"description\": \"desc\",\n    \"latitude\": 53.428935604289904,\n    \"longitude\": -7.933333522131733\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -133,7 +133,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Customer\",\n    \"lastName\": \"Four\",\n    \"email\": \"email@email.com\",\n    \"address\": \"Address\",\n    \"description\": \"desc\",\n    \"latitude\": 53.41752495789626,\n    \"longitude\": -7.943368603631512,\n    \"exactLocation\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n            -7.943368603631512,\n            53.41752495789626\n        ]\n    }\n}",
+							"raw": "{\n    \"name\": \"Customer\",\n    \"lastName\": \"Four\",\n    \"email\": \"email@email.com\",\n    \"address\": \"Address\",\n    \"description\": \"desc\",\n    \"latitude\": 53.41752495789626,\n    \"longitude\": -7.943368603631512\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -164,7 +164,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Customer\",\n    \"lastName\": \"Five\",\n    \"email\": \"email@email.com\",\n    \"address\": \"Address\",\n    \"description\": \"desc\",\n    \"latitude\": 53.428935604289904,\n    \"longitude\": -7.933333522131733,\n    \"exactLocation\": {\n        \"type\": \"Point\",\n        \"coordinates\": [\n            -7.933333522131733,\n            53.428935604289904\n        ]\n    }\n}",
+							"raw": "{\n    \"name\": \"Customer\",\n    \"lastName\": \"Five\",\n    \"email\": \"email@email.com\",\n    \"address\": \"Address\",\n    \"description\": \"desc\",\n    \"latitude\": 53.428935604289904,\n    \"longitude\": -7.933333522131733\n}",
 							"options": {
 								"raw": {
 									"language": "json"
