@@ -1,11 +1,14 @@
 package com.descentrilizedsynergy.supdem.consumer.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.PrecisionModel;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +24,8 @@ public class ConsumerProfileService {
         private ConsumerProfileRepository profileRepository;
 
         public ConsumerProfileResponse createProfile(ConsumerProfileRequest requestBody) {
-                double latitude = requestBody.getLatitude(); // requestBody.getExactLocation().getX(); // 40.689234d;
-                double longitude = requestBody.getLongitude(); // requestBody.getExactLocation().getY(); // -74.044598d;
+                double latitude = requestBody.getLatitude();
+                double longitude = requestBody.getLongitude();
 
                 GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(PrecisionModel.FLOATING),
                                 4326);
@@ -38,7 +41,7 @@ public class ConsumerProfileService {
 
                 ConsumerProfile createdProfile = profileRepository.save(newProfile);
                 ConsumerProfileResponse response = new ConsumerProfileResponse();
-                response.setSingleProfile(createdProfile);
+                response.setSingleProfile(requestBody);
                 return response;
         }
 
@@ -46,14 +49,18 @@ public class ConsumerProfileService {
                 // TODO add pagination
                 List<ConsumerProfile> allProfiles = profileRepository.findAll();
                 ConsumerProfileResponse response = new ConsumerProfileResponse();
-                response.setProfiles(allProfiles);
-                return response;
-        }
 
-        public ConsumerProfileResponse getProfileByProximityToLocation(Double latitude, Double longitude) {
-                List<ConsumerProfile> profilesNearby = profileRepository.findAllByLngLat(latitude, longitude);
-                ConsumerProfileResponse response = new ConsumerProfileResponse();
-                response.setProfiles(profilesNearby);
+                List<ConsumerProfileRequest> toRequests = new ArrayList<>();
+                for(ConsumerProfile entityProfile : allProfiles) {
+                        ConsumerProfileRequest copy = new ConsumerProfileRequest();
+                        // BeanUtils.copyProperties(copy, entityProfile);
+                        ModelMapper modelMapper = new ModelMapper();
+                        modelMapper.getConfiguration().setSkipNullEnabled(true).setMatchingStrategy(MatchingStrategies.STRICT);
+                        modelMapper.map(entityProfile, copy);
+                        toRequests.add(copy);
+                }
+
+                response.setProfiles(toRequests);
                 return response;
         }
 }

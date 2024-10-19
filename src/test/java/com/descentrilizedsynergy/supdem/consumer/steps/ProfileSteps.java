@@ -1,6 +1,6 @@
 package com.descentrilizedsynergy.supdem.consumer.steps;
 
-import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertEquals;
 
 import com.descentrilizedsynergy.supdem.consumer.client.RestClient;
 import com.descentrilizedsynergy.supdem.consumer.model.ConsumerProfileResponse;
@@ -13,7 +13,6 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 
 // import static io.restassured.RestAssured.*;
@@ -31,12 +30,21 @@ public class ProfileSteps {
     public void noProfilesAvailableInTheSystem() {
     }
 
-    @When("I access the get profileCloseToLocation endpoint with latitude,longitude: {double},{double}")
+    @When("I create my profile with latitude,longitude: {double},{double}")
     public void iAccessGetProfileEndpointWithMyLocation(double latitude, double longitude) {
+        // TODO from here;
+        JSONObject requestParams = new JSONObject();
+        requestParams.put("name", "Felipe");
+        requestParams.put("lastName", "Plumber D");
+        requestParams.put("email", "customer1@tets.com");
+        requestParams.put("description", "An amazing person to work with. ");
+        requestParams.put("address", "An amazing person to work with. ");
+        requestParams.put("latitude", latitude);
+        requestParams.put("longitude", longitude);
+
         RequestSpecification rq = restClient.getRequestSpecification();
-        response = rq.queryParam("latitude", latitude).queryParam("longitude", longitude)
-                .get("/api/consumer/profileCloseToLocation");
-        // response.then().log().all();
+        response = rq.header("Content-Type",
+                "application/json").body(requestParams.toJSONString()).post("/api/consumer/profile");
     }
 
     @Then("I get a successful response with http code {int}")
@@ -44,45 +52,39 @@ public class ProfileSteps {
         response.then().statusCode(expectedHttpResponseCode);
     }
 
-    @And("An empty list of profiles is returned")
+    @And("One profile is returned")
     public void responseHasExpectedFieldsForGetUsersEndpoint() {
-        response.as(ConsumerProfileResponse[].class);
+        response.as(ConsumerProfileResponse.class);
     }
 
     @Given("I add one profile with location {double},{double} and covered area of {double}")
     public void iAddOneProfileUsingTheEndpoint(double latitude, double longitude, double distanceInMeeters) {
-        JSONArray coordinatesArray = new JSONArray();
-        coordinatesArray.add(-7.943368603631512);
-        coordinatesArray.add(53.41752495789626);
-        JSONObject exactLocationJson = new JSONObject();
-        exactLocationJson.put("coordinates", coordinatesArray);
-        exactLocationJson.put("type", "Point");
         JSONObject requestParams = new JSONObject();
-        requestParams.put("name", "Felipe");
-        requestParams.put("lastName", "Plumber D");
-        requestParams.put("email", "lpluma@tets.com");
+        requestParams.put("name", "Client");
+        requestParams.put("lastName", "Two");
+        requestParams.put("email", "customer1@tets.com");
         requestParams.put("description", "An amazing person to work with. ");
-        requestParams.put("desiredHourlyRate", 18.20);
-        requestParams.put("exactLocation", exactLocationJson);
-        requestParams.put("travelDistanceInMeters", 4000);
+        requestParams.put("address", "An amazing person to work with. ");
+        requestParams.put("latitude", latitude);
+        requestParams.put("longitude", longitude);
 
         RequestSpecification rq = restClient.getRequestSpecification();
         response = rq.header("Content-Type",
                 "application/json").body(requestParams.toJSONString()).post("/api/consumer/profile");
     }
 
-    @When("I access the get profileCloseToLocation with matching location with latitude,longitude: {double},{double}")
-    public void iAccessGetProfileEndpointWithMatchingLocation(double latitude, double longitude) {
+    @When("I list all the profiles in the system")
+    public void iAccessGetProfileEndpointWithMatchingLocation() {
         RequestSpecification rq = restClient.getRequestSpecification();
-        response = rq.queryParam("latitude", latitude).queryParam("longitude", longitude)
-                .get("/api/consumer/profileCloseToLocation");
+        response = rq.get("/api/consumer/profiles");
         response.then().log().all();
     }
 
     @And("The response returns {int} profile added")
     public void iGetResponseWithOneProfile(int numberOfProfiles) {
-        response.as(ConsumerProfileResponse[].class);
-        response.then().assertThat().body("size()", is(numberOfProfiles));
+        response.as(ConsumerProfileResponse.class);
+        ConsumerProfileResponse realResponse = response.then().assertThat().extract().as(ConsumerProfileResponse.class);
+        assertEquals(numberOfProfiles, realResponse.getProfiles().size());
     }
 
 }

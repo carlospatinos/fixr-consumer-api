@@ -30,8 +30,4 @@ public class ConsumerProfileRequest {
 
     @JsonProperty("longitude")
     private Double longitude;
-
-    // // TODO remove to simplify API
-    // @JsonProperty("exactLocation")
-    // private Point exactLocation;
 }
