@@ -3,7 +3,6 @@ package com.descentrilizedsynergy.supdem.consumer.db.model;
 import java.util.UUID;
 
 import org.locationtech.jts.geom.Point;
-import org.locationtech.jts.geom.Polygon;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -42,25 +41,20 @@ public class ConsumerProfile {
     @NonNull
     private String email;
 
+    @Column(name = "address", nullable = false)
+    private String address;
+
     @Column(name = "description", nullable = true)
     private String description;
 
-    @Column(name = "desired_hourly_price", nullable = true)
-    private Double desiredHourlyRate;
+    @Column(name = "latitude", nullable = true)
+    private Double latitude;
 
-    @Column(name = "travel_distance", nullable = true)
-    @NonNull
-    private Double travelDistance;
+    @Column(name = "longitude", nullable = true)
+    private Double longitude;
 
     @Column(name = "exact_location", columnDefinition = "geometry(POINT, 4326)", nullable = true)
     @NonNull
     private Point exactLocation;
-
-    @Column(name = "currency", nullable = true)
-    private String currency;
-
-    @Column(name = "covered_area", columnDefinition = "geometry(POLYGON, 4326)", nullable = true)
-    @NonNull
-    private Polygon coveredArea;
 
 }

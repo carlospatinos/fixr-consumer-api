@@ -1,8 +1,5 @@
 package com.descentrilizedsynergy.supdem.consumer.model;
 
-import org.locationtech.jts.geom.Point;
-import org.locationtech.jts.geom.Polygon;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
@@ -22,22 +19,19 @@ public class ConsumerProfileRequest {
     @JsonProperty("email")
     private String email;
 
+    @JsonProperty("address")
+    private String address;
+
     @JsonProperty("description")
     private String description;
 
-    @JsonProperty("desiredHourlyRate")
-    private Double desiredHourlyRate;
+    @JsonProperty("latitude")
+    private Double latitude;
 
-    @JsonProperty("exactLocation")
-    private Point exactLocation;
+    @JsonProperty("longitude")
+    private Double longitude;
 
-    @JsonProperty("currency")
-    private String currency;
-
-    // TODO remove this as we will be generating the polygon dynamically.
-    @JsonProperty("coveredArea")
-    private Polygon coveredArea;
-
-    @JsonProperty("travelDistanceInMeters")
-    private Double travelDistanceInMeters;
+    // // TODO remove to simplify API
+    // @JsonProperty("exactLocation")
+    // private Point exactLocation;
 }

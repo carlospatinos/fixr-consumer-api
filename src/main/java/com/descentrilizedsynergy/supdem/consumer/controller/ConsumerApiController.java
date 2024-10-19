@@ -1,6 +1,5 @@
 package com.descentrilizedsynergy.supdem.consumer.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.descentrilizedsynergy.supdem.consumer.model.ConsumerProfileRequest;
@@ -28,19 +26,11 @@ public class ConsumerApiController {
     @GetMapping("/health")
     public ResponseEntity<String> health() throws InterruptedException {
         log.info("Service working");
-        return ResponseEntity.ok("Service working");
+        return ResponseEntity.ok("{status: \"Service working\"}");
     }
 
     @Value(value = "${application.version}")
     private String APPLICATION_VERSION;
-
-    // TODO remove
-    @PostMapping("/profileWithPolygon")
-    public ResponseEntity<ConsumerProfileResponse> create(@RequestBody ConsumerProfileRequest requestBody) {
-        log.info("Creating profile as follows: {}", requestBody);
-        ConsumerProfileResponse newProfile = service.createProfileWithPolygon(requestBody);
-        return new ResponseEntity<>(newProfile, HttpStatus.OK);
-    }
 
     @PostMapping("/profile")
     public ResponseEntity<ConsumerProfileResponse> createProfile(@RequestBody ConsumerProfileRequest requestBody) {
@@ -51,18 +41,10 @@ public class ConsumerApiController {
 
     // TODO consider pagination and sorting
     @GetMapping("/profiles")
-    public ResponseEntity<List<ConsumerProfileResponse>> listProfiles() {
-        List<ConsumerProfileResponse> profiles = service.getProfiles();
-        log.info("Returning [{}] profiles", profiles.size());
-        return new ResponseEntity<>(profiles, HttpStatus.OK);
-    }
-
-    @GetMapping("/profileCloseToLocation")
-    public ResponseEntity<List<ConsumerProfileResponse>> listByProximityToLocation(@RequestParam Double latitude,
-            @RequestParam Double longitude) {
-        log.info("Returning profiles close to (lat,long): ({}, {})", latitude, longitude);
-        List<ConsumerProfileResponse> profiles = service.getProfileByProximityToLocation(latitude, longitude);
-        return new ResponseEntity<>(profiles, HttpStatus.OK);
+    public ResponseEntity<ConsumerProfileResponse> listProfiles() {
+        ConsumerProfileResponse response = service.getProfiles();
+        log.info("Returning [{}] profiles", response);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @GetMapping("/version")

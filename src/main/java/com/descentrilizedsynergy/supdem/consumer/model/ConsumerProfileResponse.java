@@ -1,9 +1,8 @@
 package com.descentrilizedsynergy.supdem.consumer.model;
 
-import java.util.UUID;
+import java.util.List;
 
-import org.locationtech.jts.geom.Point;
-import org.locationtech.jts.geom.Polygon;
+import com.descentrilizedsynergy.supdem.consumer.db.model.ConsumerProfile;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,12 +14,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class ConsumerProfileResponse {
-    private UUID id;
-    private String name;
-    private String lastName;
-    private String email;
-    private String description;
-    private Double desiredHourlyRate;
-    private Polygon coveredArea;
-    private Point exactLocation;
+    private List<ConsumerProfile> profiles;
+    private ConsumerProfile singleProfile;
 }
