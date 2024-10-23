@@ -3,6 +3,7 @@
 *.class
 build/
 target/
+bin/
 
 # Log file
 *.log
