@@ -3,4 +3,4 @@ WORKDIR /app
 COPY build/libs/*.jar app.jar
 
 #  TODO Set up postgresql cloud connection
-ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=prod", "app.jar"]
+ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=local", "app.jar"]
