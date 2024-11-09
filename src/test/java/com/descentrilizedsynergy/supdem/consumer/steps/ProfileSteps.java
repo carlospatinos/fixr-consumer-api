@@ -37,6 +37,7 @@ public class ProfileSteps {
         requestParams.put("name", "Felipe");
         requestParams.put("lastName", "Plumber D");
         requestParams.put("email", "customer1@tets.com");
+        requestParams.put("password", "password123");
         requestParams.put("description", "An amazing person to work with. ");
         requestParams.put("address", "An amazing person to work with. ");
         requestParams.put("latitude", latitude);
@@ -63,6 +64,7 @@ public class ProfileSteps {
         requestParams.put("name", "Client");
         requestParams.put("lastName", "Two");
         requestParams.put("email", "customer1@tets.com");
+        requestParams.put("password", "password123");
         requestParams.put("description", "An amazing person to work with. ");
         requestParams.put("address", "An amazing person to work with. ");
         requestParams.put("latitude", latitude);
