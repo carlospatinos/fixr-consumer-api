@@ -40,7 +40,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Customer\",\n    \"lastName\": \"One\",\n    \"email\": \"email@email.com\",\n    \"address\": \"Address\",\n    \"description\": \"desc\",\n    \"latitude\": 53.428935604289904,\n    \"longitude\": -7.933333522131733\n}",
+							"raw": "{\n    \"name\": \"Customer\",\n    \"lastName\": \"One\",\n    \"email\": \"customer1@mail.com\",\n    \"password\": \"password123\",\n    \"address\": \"Address\",\n    \"description\": \"desc\",\n    \"latitude\": 53.428935604289904,\n    \"longitude\": -7.933333522131733\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -71,7 +71,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Customer\",\n    \"lastName\": \"Two\",\n    \"email\": \"email@email.com\",\n    \"address\": \"Address\",\n    \"description\": \"desc\",\n    \"latitude\": 53.42347263783353,\n    \"longitude\": -7.956782053866533\n}",
+							"raw": "{\n    \"name\": \"Customer\",\n    \"lastName\": \"Two\",\n    \"email\": \"customer2@mail.com\",\n    \"password\": \"password123\",\n    \"address\": \"Address\",\n    \"description\": \"desc\",\n    \"latitude\": 53.42347263783353,\n    \"longitude\": -7.956782053866533\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -102,7 +102,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Customer\",\n    \"lastName\": \"Three\",\n    \"email\": \"email@email.com\",\n    \"address\": \"Address\",\n    \"description\": \"desc\",\n    \"latitude\": 53.428935604289904,\n    \"longitude\": -7.933333522131733\n}",
+							"raw": "{\n    \"name\": \"Customer\",\n    \"lastName\": \"Three\",\n    \"email\": \"customer3@mail.com\",\n    \"password\": \"password123\",\n    \"address\": \"Address\",\n    \"description\": \"desc\",\n    \"latitude\": 53.428935604289904,\n    \"longitude\": -7.933333522131733\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -133,7 +133,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Customer\",\n    \"lastName\": \"Four\",\n    \"email\": \"email@email.com\",\n    \"address\": \"Address\",\n    \"description\": \"desc\",\n    \"latitude\": 53.41752495789626,\n    \"longitude\": -7.943368603631512\n}",
+							"raw": "{\n    \"name\": \"Customer\",\n    \"lastName\": \"Four\",\n    \"email\": \"customer4@mail.com\",\n    \"password\": \"password123\",\n    \"address\": \"Address\",\n    \"description\": \"desc\",\n    \"latitude\": 53.41752495789626,\n    \"longitude\": -7.943368603631512\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -164,7 +164,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Customer\",\n    \"lastName\": \"Five\",\n    \"email\": \"email@email.com\",\n    \"address\": \"Address\",\n    \"description\": \"desc\",\n    \"latitude\": 53.428935604289904,\n    \"longitude\": -7.933333522131733\n}",
+							"raw": "{\n    \"name\": \"Customer\",\n    \"lastName\": \"Five\",\n    \"email\": \"customer5@mail.com\",\n    \"password\": \"password123\",\n    \"address\": \"Address\",\n    \"description\": \"desc\",\n    \"latitude\": 53.428935604289904,\n    \"longitude\": -7.933333522131733\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -220,6 +220,34 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"customer1@mail.com\", \n    \"password\": \"password123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/api/public/login",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"api",
+						"public",
+						"login"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -249,6 +277,11 @@
 			"key": "URL",
 			"value": "http://localhost:8080",
 			"type": "string"
+		},
+		{
+			"key": "CONSUMER_URL",
+			"value": "https://fixr-consumer-159026163984.europe-west2.run.app",
+			"type": "default"
 		}
 	]
 }
