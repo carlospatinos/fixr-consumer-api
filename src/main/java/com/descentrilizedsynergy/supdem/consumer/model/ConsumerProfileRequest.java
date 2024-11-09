@@ -19,6 +19,10 @@ public class ConsumerProfileRequest {
     @JsonProperty("email")
     private String email;
 
+    @ToString.Exclude
+    @JsonProperty("password")
+    private String password;
+
     @JsonProperty("address")
     private String address;
 
