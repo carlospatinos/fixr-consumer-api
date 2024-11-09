@@ -57,6 +57,15 @@ dependencies {
   	implementation("org.hibernate.orm:hibernate-spatial:6.4.4.Final")
 
 	implementation 'com.google.cloud:spring-cloud-gcp-starter-sql-postgresql:5.7.0'
+
+
+
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	testImplementation 'org.springframework.security:spring-security-test'
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'  
+	// TODO runtimeOnly works in prod and test from vscode but on command line the last jwt cucumber test fails. Using implementation rather than runtimeOnly fixes it but not sure thats what we need to do.
+	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5' //runtimeOnly
+	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5' //runtimeOnly
 }
 
 tasks.named('test') {
@@ -80,7 +89,7 @@ task cucumberCli() {
 			  '--plugin', 'json:build/cucumber-report.json',
               '--plugin', 'html:build/cucumber-report.html', 
               '--glue', 'com.descentrilizedsynergy.supdem.consumer.steps', 
-              'src/test/resources']
+              'src/test/features']
         }
     }
 }

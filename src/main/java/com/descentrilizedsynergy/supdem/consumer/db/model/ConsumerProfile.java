@@ -1,8 +1,15 @@
 package com.descentrilizedsynergy.supdem.consumer.db.model;
 
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.locationtech.jts.geom.Point;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,7 +31,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ConsumerProfile {
+public class ConsumerProfile implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -41,6 +48,9 @@ public class ConsumerProfile {
     @NonNull
     private String email;
 
+    @Column(nullable = true)
+    private String password;
+
     @Column(name = "address", nullable = false)
     private String address;
 
@@ -56,5 +66,43 @@ public class ConsumerProfile {
     @Column(name = "exact_location", columnDefinition = "geometry(POINT, 4326)", nullable = true)
     @NonNull
     private Point exactLocation;
+
+    @CreationTimestamp
+    @Column(updatable = false, name = "created_at")
+    private Date createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private Date updatedAt;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
 }

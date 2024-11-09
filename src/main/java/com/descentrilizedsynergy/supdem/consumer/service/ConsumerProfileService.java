@@ -10,6 +10,7 @@ import org.locationtech.jts.geom.PrecisionModel;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.descentrilizedsynergy.supdem.consumer.db.model.ConsumerProfile;
@@ -22,6 +23,9 @@ public class ConsumerProfileService {
 
         @Autowired
         private ConsumerProfileRepository profileRepository;
+
+        @Autowired
+        private PasswordEncoder passwordEncoder;
 
         public ConsumerProfileResponse createProfile(ConsumerProfileRequest requestBody) {
                 double latitude = requestBody.getLatitude();
@@ -38,6 +42,7 @@ public class ConsumerProfileService {
                 newProfile.setLatitude(latitude);
                 newProfile.setLongitude(longitude);
                 newProfile.setAddress(requestBody.getAddress());
+                newProfile.setPassword(passwordEncoder.encode(requestBody.getPassword()));
 
                 ConsumerProfile createdProfile = profileRepository.save(newProfile);
                 ConsumerProfileResponse response = new ConsumerProfileResponse();
@@ -51,11 +56,12 @@ public class ConsumerProfileService {
                 ConsumerProfileResponse response = new ConsumerProfileResponse();
 
                 List<ConsumerProfileRequest> toRequests = new ArrayList<>();
-                for(ConsumerProfile entityProfile : allProfiles) {
+                for (ConsumerProfile entityProfile : allProfiles) {
                         ConsumerProfileRequest copy = new ConsumerProfileRequest();
                         // BeanUtils.copyProperties(copy, entityProfile);
                         ModelMapper modelMapper = new ModelMapper();
-                        modelMapper.getConfiguration().setSkipNullEnabled(true).setMatchingStrategy(MatchingStrategies.STRICT);
+                        modelMapper.getConfiguration().setSkipNullEnabled(true)
+                                        .setMatchingStrategy(MatchingStrategies.STRICT);
                         modelMapper.map(entityProfile, copy);
                         toRequests.add(copy);
                 }
