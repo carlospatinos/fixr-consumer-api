@@ -12,6 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class ConsumerProfileResponse {
+    private String error;
     private List<ConsumerProfileRequest> profiles;
     private ConsumerProfileRequest singleProfile;
 }

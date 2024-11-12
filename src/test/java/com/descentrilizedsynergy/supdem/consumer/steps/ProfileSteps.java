@@ -63,7 +63,7 @@ public class ProfileSteps {
         JSONObject requestParams = new JSONObject();
         requestParams.put("name", "Client");
         requestParams.put("lastName", "Two");
-        requestParams.put("email", "customer1@tets.com");
+        requestParams.put("email", "customer2@tets.com");
         requestParams.put("password", "password123");
         requestParams.put("description", "An amazing person to work with. ");
         requestParams.put("address", "An amazing person to work with. ");

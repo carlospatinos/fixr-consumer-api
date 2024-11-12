@@ -10,6 +10,7 @@ import org.locationtech.jts.geom.PrecisionModel;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,14 +19,26 @@ import com.descentrilizedsynergy.supdem.consumer.db.repository.ConsumerProfileRe
 import com.descentrilizedsynergy.supdem.consumer.model.ConsumerProfileRequest;
 import com.descentrilizedsynergy.supdem.consumer.model.ConsumerProfileResponse;
 
+import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class ConsumerProfileService {
+        private ModelMapper modelMapper;
 
         @Autowired
         private ConsumerProfileRepository profileRepository;
 
         @Autowired
         private PasswordEncoder passwordEncoder;
+
+        @PostConstruct
+        public void init() {
+                modelMapper = new ModelMapper();
+                modelMapper.getConfiguration().setSkipNullEnabled(true)
+                                .setMatchingStrategy(MatchingStrategies.STRICT);
+        }
 
         public ConsumerProfileResponse createProfile(ConsumerProfileRequest requestBody) {
                 double latitude = requestBody.getLatitude();
@@ -44,9 +57,20 @@ public class ConsumerProfileService {
                 newProfile.setAddress(requestBody.getAddress());
                 newProfile.setPassword(passwordEncoder.encode(requestBody.getPassword()));
 
-                ConsumerProfile createdProfile = profileRepository.save(newProfile);
                 ConsumerProfileResponse response = new ConsumerProfileResponse();
-                response.setSingleProfile(requestBody);
+                try {
+                        ConsumerProfile createdProfile = profileRepository.save(newProfile);
+                        ConsumerProfileRequest copy = new ConsumerProfileRequest();
+                        modelMapper.map(createdProfile, copy);
+                        response.setSingleProfile(copy);
+                } catch (DataIntegrityViolationException ex) {
+                        log.error("Profile already exist", ex.getMessage());
+                        response.setError("Profile already exist");
+                } catch (Exception ex) {
+                        log.error("Profile creation error", ex);
+                        response.setError(ex.getMessage());
+                }
+
                 return response;
         }
 

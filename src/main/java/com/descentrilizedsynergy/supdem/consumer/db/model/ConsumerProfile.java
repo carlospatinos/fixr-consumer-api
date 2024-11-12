@@ -44,7 +44,7 @@ public class ConsumerProfile implements UserDetails {
     @NonNull
     private String lastName;
 
-    @Column(name = "email", nullable = false)
+    @Column(unique = true, name = "email", nullable = false, length = 100)
     @NonNull
     private String email;
 
